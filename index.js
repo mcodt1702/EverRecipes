@@ -15,7 +15,9 @@ function listenToIngredients(){
         $('.searchResults').empty();
         console.log('i hear you have ingredients to use');
         $('.searchResults').html(renderIngredientsForm())
-        listenToAddSecondIngredient()
+        listenToAddSecondIngredient();
+        listenToAddThirdIngredient();
+       
     
     })}
 
@@ -28,7 +30,20 @@ $('form').on('click', '.addfirstIngredient', function(event){
   $('input, button').removeClass('addsecondingredient');
  console.log('you want to add a second ingredient')
 })
-removeClass('addsecondingredient');
+//removeClass('addsecondingredient');
+
+}
+
+function listenToAddThirdIngredient(){
+  $('form').on('click', '#addThirdIngredient', function(event){
+    event.preventDefault();
+    $('input, button').removeClass('addThirdIngredient');
+    console.log('you want to add a third ingredient')
+   
+    
+   
+  })
+  
 
 }
 
@@ -83,7 +98,7 @@ function renderStartPage(){
 
 
 function fetchRandomRecipies(){
-randomBaseUrl= 'https://api.spoonacular.com/recipes/random?number=5&apiKey=9e69e52110214fba9df8d2b11c0d0ec1'
+randomBaseUrl= '111https://api.spoonacular.com/recipes/random?number=5&apiKey=9e69e52110214fba9df8d2b11c0d0ec1'
 
 fetch(randomBaseUrl)
 .then((response) => {
@@ -134,8 +149,8 @@ return `
         <button class="addsecondingredient">Add Ingredient</button>
     </div>    
     <div>
-        <input class="addthirdingredient" type="text">
-        <button class="addthirdingredient">submit</button>
+        <input id="addThirdIngredient" class="addThirdIngredient" type="text">
+        <button class="addThirdIngredient">submit</button>
     </div>
     
 </form>`
@@ -168,6 +183,7 @@ function handleRecipies(){
     render()
     listenToDishes()
     listenToIngredients()
+    listenToAddThirdIngredient()
     listenToCuisine()
 
 

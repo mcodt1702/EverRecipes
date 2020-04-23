@@ -1,78 +1,88 @@
-*{
-    font-family: 'Quicksand', sans-serif;
-    box-sizing: border-box;
-   
+* {
+  font-family: "Quicksand", sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  background: url(./images/mapleWoodDarkVertical.jpg) no-repeat center center
+    fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 600;
+  color: beige;
+  font-size: 80px;
+  margin-top: 10px;
 }
 
 
-html { 
-    background: url(./images/mapleWoodDarkVertical.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    
-  }
+h2{
 
-  h1 {
-      text-align: center;
-font-weight: 600;
-color: beige;
-font-size: 80px;
-  }
+  font-size: 40px;
+}
 
-  .nav {
-    width: 180px;
-    height: 40px;
-    background-color: beige;
-    text-align: center;
-    border-radius: 20%;
-    padding: 50px;
-  }
+h3 {
+  font-size: 20px;
+}
+.nav {
+  width: 180px;
+  height: 20px;
+  background-color: beige;
+  text-align: center;
+  border-radius: 20%;
+  padding: 50px;
+}
 
- div{
+div {
+  padding: 20px;
+}
+.navigationSearch {
+  justify-content: space-around;
+  display: flex;
+}
 
-    padding: 20px;
- }
-  .navigationSearch{
-    justify-content: space-around;
-    display: flex;
-  }
-
-  .navicon{
-    display: none;
-width: 130px;
-
-  }
-
+.navicon {
+  display: none;
+  width: 130px;
+}
 
 #randomRecipeImage {
+  height: 150px;
+}
 
-height:100px;
+#randomRecipeTitle {
+  font-size: 30px;
+}
+.addsecondingredient {
+  display: none;
+}
 
-  }
+.addThirdIngredient {
+  display: none;
+}
 
- #randomRecipeTitle {
+div {
+  text-align: center;
+  margin-top: 50px;
+}
 
-    font-size: 150px;
-  }
+form {
+  margin: 100px;
+}
 
-  
+section {
+  text-align: center;
+  margin-top: 80px;
+}
 
-  #randomRecipeTitle{
-font-size: 50px;
-
-  }
-  .addsecondingredient{
-
-    display: none;
-  }
-
-  .addThirdIngredient {
-
-    display:none;
-  }
-
-  div {
-    text-align: center;
-  }
+#randomRecipies {
+  margin-right: auto;
+  margin-left: auto;
+  width: 70%;
+  display: flex;
+}

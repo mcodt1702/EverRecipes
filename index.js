@@ -8,10 +8,11 @@ function listenToCuisine() {
     event.preventDefault();
     $(".randomResults").hide();
     $(".searchResults").hide();
+    $(".searchResults3").hide();
     $(".searchResults2").show();
     console.log("i hear you want mexican");
     $(".searchResults2").html(renderCuisineForm());
-    listenToDropDownMenu();
+    handleCuisineChoice();
   });
 }
 
@@ -20,15 +21,16 @@ function listenToDishes() {
     event.preventDefault();
     $(".randomResults").hide();
     $(".searchResults").hide();
-    $(".searchResults2").show();
+    $(".searchResults3").show();
+    $(".searchResults2").hide()
     console.log("i hear you want a special dish");
-    $(".searchResults2").html(renderDishForm());
-    listenToDropDownMenu();
+    $(".searchResults3").html(renderDishForm());
+    handleDishChoice();
     
   });
 }
 
-function  handleIngredientChoices() {
+function  listentToIngredients() {
   $(".navigationSearch").on("click", "#ingredients", function (event) {
     event.preventDefault();
     $(".randomResults").hide();
@@ -51,7 +53,16 @@ function  handleIngredientChoice() {
   });
 }
 
-function listenToDropDownMenu() {
+function handleDishChoice(){ 
+  $("form").on("submit", function (event) {
+  event.preventDefault();
+  console.log("you cliked to submit choice")
+  let dish = $("#dishchoice").val();
+  fetchRecipiesDish(dish);
+})
+}
+
+function handleCuisineChoice() {
   $("#myList").on("change", function (event) {
     event.preventDefault();
     const aquireCuisine = $(".cuisineSelection").val();
@@ -150,14 +161,31 @@ function renderDishForm(){
   return `
     <form>
       <h2>What dish are you looking for?</h2>
-      <div id="one"><input type="text" id="firstIngredient" class="addfirstIngredient">
-          <button type="submit" class="addfirstIngredient">Submit</button>
+      <div id="one"><input type="text" id="dishchoice" class="dishchoice">
+          <button type="submit" class="dishchoice">Submit</button>
       </div>
     </form>
     
 `
 
 }
+
+
+function renderDishResults(responseJson){
+  console.log(responseJson);
+  for (let i = 0; i < responseJson.products.length; i++) {
+    $(".searchResults3").append(`
+
+          <div id='ingredientRecipies${i}'>
+            <img id="ingredientRecipeImage" src=${responseJson.products[i].image}>
+            <h3 id="ingredientRecipeTitle">${responseJson.products[i].title}</h3>
+              <button type="submit" onclick="gotoRecipe(${responseJson.products[i].id})">Get Recipe</button>
+          </div><br><br> `);
+  }
+
+
+}
+
 
 //render--------render--------render--------render--------render--------render--------render--------render
 //--------render--------render--------render--------render--------render--------render--------
@@ -262,7 +290,7 @@ function gotoURL(responseJson){
 
 function fetchRandomRecipies() {
   randomBaseUrl =
-    "11https://api.spoonacular.com/recipes/random?number=5&apiKey=9e69e52110214fba9df8d2b11c0d0ec1";
+    "https://api.spoonacular.com/recipes/random?number=5&apiKey=9e69e52110214fba9df8d2b11c0d0ec1";
 
   fetch(randomBaseUrl)
     .then((response) => {
@@ -335,12 +363,31 @@ console.log(cuisineBaseURL);
 
 }
 
+ function fetchRecipiesDish(dish){
+  dishBaseURL = `https://api.spoonacular.com/food/products/search?query=${dish}${apiKey}`
+
+  fetch(dishBaseURL)
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error(response.statusText);
+  })
+  .then((responseJson) => renderDishResults(responseJson));
+
+
+  console.log(dish);
+}
+
+
+
+
 
 
 function handleRecipies() {
   render();
   listenToDishes();
-   handleIngredientChoices();
+   listentToIngredients();
   listenToCuisine();
 }
 

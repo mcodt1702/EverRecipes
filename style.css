@@ -86,3 +86,9 @@ section {
   width: 70%;
   display: flex;
 }
+
+
+#ingredientRecipeImage{
+
+  height: 200px;
+}

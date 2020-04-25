@@ -18,10 +18,13 @@ function listenToCuisine() {
 function listenToDishes() {
   $(".navigationSearch").on("click", "#dishes", function (event) {
     event.preventDefault();
-    $(".searchResults").hide();
-    $(".searchResults2").hide();
     $(".randomResults").hide();
-    console.log("i hear you want a dish");
+    $(".searchResults").hide();
+    $(".searchResults2").show();
+    console.log("i hear you want a special dish");
+    $(".searchResults2").html(renderDishForm());
+    listenToDropDownMenu();
+    
   });
 }
 
@@ -49,11 +52,12 @@ function  handleIngredientChoice() {
 }
 
 function listenToDropDownMenu() {
-  $("#myList").on("click change", function (event) {
+  $("#myList").on("change", function (event) {
     event.preventDefault();
-    console.log("you selected a cuisine");
     const aquireCuisine = $(".cuisineSelection").val();
     console.log(aquireCuisine);
+    fetchRecipiesCuisine(aquireCuisine); 
+    
   });
 }
 
@@ -141,65 +145,115 @@ function renderIngredientsForm() {
 }
 
 
+
+function renderDishForm(){
+  return `
+    <form>
+      <h2>What dish are you looking for?</h2>
+      <div id="one"><input type="text" id="firstIngredient" class="addfirstIngredient">
+          <button type="submit" class="addfirstIngredient">Submit</button>
+      </div>
+    </form>
+    
+`
+
+}
+
 //render--------render--------render--------render--------render--------render--------render--------render
 //--------render--------render--------render--------render--------render--------render--------
 function gotoRecipe(recipeId) {
   fetchURLwithId(recipeId);
 }
 
+//render--------render--------render--------render--------render--------render--------render--------render
+//--------render--------render--------render--------render--------render--------render--------
+
+
 function renderIngredientResults(responseJson) {
   console.log(responseJson);
-  // let id = 0;
   for (let i = 0; i < responseJson.length; i++) {
     $(".searchResults").append(`
 
           <div id='ingredientRecipies${i}'>
             <img id="ingredientRecipeImage" src=${responseJson[i].image}>
             <h3 id="ingredientRecipeTitle">${responseJson[i].title}</h3>
-              <p>${responseJson[i].id}</p>
-           
               <button type="submit" onclick="gotoRecipe(${responseJson[i].id})">Get Recipe</button>
-              <br><br>
-          </div><br><br>      `);
+          </div><br><br> `);
   }
-  // listenToExpandedIngredientSearch();
-  //id[i] = responseJson[i].id
+ 
+
 }
+
+
+
+//render--------render--------render--------render--------render--------render--------render--------render
+//--------render--------render--------render--------render--------render--------render--------
 
 function renderCuisineForm() {
   return `
   <form>
   <fieldset>
      <legend><h2>Select Cuisine</h2></legend>
-     <p>
+     
         <label for= "Cuisine">Select list</label>
         <select id = "myList" class = "cuisineSelection">
-        <option selected disabled></option>
-          <option value = "African">African</option>
-          <option value = "American">American</option>
-          <option value = "British">British</option>
-          <option value = "Cajun">Cajun</option>
-          <option value = "Caribbean">Caribbean</option>
-          <option value = "Chinese">Chinese</option>
-          <option value = "Eastern European">Eastern European</option>
-          <option value = "French">French</option>
-          <option value = "German">German</option>
-          <option value = "Greek">Greek</option>
-          <option value = "Indian">Indian</option>
-          <option value = "Irish">Irish</option>
-          <option value = "Italian">Italian</option>
-          <option value = "Japanese">Japanese</option>
-          <option value = "Mexican">Mexican</option>
-          <option value = "Middle Eastern">Middle Eastern</option>
-          <option value = "Spanish">Spanish</option>
-          <option value = "Thai">Thai</option>
-          <option value = "Vietnamese">Vietnamese</option>
-          <option value = "Jewish">Jewish</option>
+              <option value "" selected disabled>Select One</option>
+              <option value = "African">African</option>
+              <option value = "American">American</option>
+              <option value = "British">British</option>
+              <option value = "Cajun">Cajun</option>
+              <option value = "Caribbean">Caribbean</option>
+              <option value = "Chinese">Chinese</option>
+              <option value = "Eastern European">Eastern European</option>
+              <option value = "French">French</option>
+              <option value = "German">German</option>
+              <option value = "Greek">Greek</option>
+              <option value = "Indian">Indian</option>
+              <option value = "Irish">Irish</option>
+              <option value = "Italian">Italian</option>
+              <option value = "Japanese">Japanese</option>
+              <option value = "Mexican">Mexican</option>
+              <option value = "Middle Eastern">Middle Eastern</option>
+              <option value = "Spanish">Spanish</option>
+              <option value = "Thai">Thai</option>
+              <option value = "Vietnamese">Vietnamese</option>
+              <option value = "Jewish">Jewish</option>
         </select>
-     </p>
   </fieldset>
 </form>
 `;
+}
+
+
+
+
+function renderCuisine(responseJson){
+console.log("Im about to render the responseJson")
+console.log(responseJson);
+$('.searchResults3').show();
+for (let i=0; i < responseJson.results.length; i++){
+console.log(responseJson.results[i].title)
+let url = responseJson.results[i].sourceUrl
+$('.searchResults3').append(`
+<div id="ingredientRecipies">
+            <a href="${url}"><img id="ingredientRecipeImage" src="https://spoonacular.com/recipeImages/${responseJson.results[i].image}">
+            <h3 id="ingredientRecipeTitle">${responseJson.results[i].title}</h3></a>
+            <p><a href="${url}">Click to go to the recipie</a></p>
+              <br><br>
+          </div><br><br>` );
+
+}
+// <button type="submit" onclick="gotoURL(${responseJson})">Get Recipe</button>
+//<br>is it doing anything<br>
+//https://www.chromestatus.com/feature/5629709824032768
+}
+
+
+function gotoURL(responseJson){
+  window.location.assign(`url`); 
+  window.location.assign(`"${responseJson.results[i].sourceUrl}"`)
+
+
 }
 
 // //---------------fetch api functions---------------fetch api functions---------------fetch api functions
@@ -208,7 +262,7 @@ function renderCuisineForm() {
 
 function fetchRandomRecipies() {
   randomBaseUrl =
-    "https://api.spoonacular.com/recipes/random?number=5&apiKey=9e69e52110214fba9df8d2b11c0d0ec1";
+    "11https://api.spoonacular.com/recipes/random?number=5&apiKey=9e69e52110214fba9df8d2b11c0d0ec1";
 
   fetch(randomBaseUrl)
     .then((response) => {
@@ -249,9 +303,37 @@ function fetchRecipiesIngredients(ingredient) {
 
 function fetchURLwithId(fetchURLwithId) {
   console.log("recipe id =", fetchURLwithId);
+
+let idBaseURL = `https://api.spoonacular.com/recipes/${fetchURLwithId}/information?includeNutrition=false${apiKey}`
+
+
+fetch(idBaseURL)
+.then((response) => {
+  if (response.ok) {
+    return response.json();
+  }
+  throw new Error(response.statusText);
+})
+.then((responseJson) => window.location.assign(`${responseJson.sourceUrl}`));
+console.log('see you later aligator')
+
 }
 
 
+function fetchRecipiesCuisine(aquireCuisine){
+cuisineBaseURL = `https://api.spoonacular.com/recipes/search?cuisine=${aquireCuisine}${apiKey}`
+console.log(cuisineBaseURL);
+          fetch(cuisineBaseURL)
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error(response.statusText);
+          })
+          .then((responseJson) => renderCuisine(responseJson));
+          
+
+}
 
 
 

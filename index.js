@@ -135,10 +135,11 @@ function renderRandom(responseJson) {
     $(".randomResults").append(`
 
   <div id='randomRecipies'>
+  <a href="${responseJson.recipes[i].sourceUrl}">
   <img id="randomRecipeImage" src=${responseJson.recipes[i].image}>
       <h3 id="randomRecipeTitle">${responseJson.recipes[i].title}</h3>
-        <p>${responseJson.recipes[i].summary}</p>
         
+        <p>Click to go to Recipe</p></a>
 
   </div>`);
 }

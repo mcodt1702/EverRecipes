@@ -49,6 +49,7 @@ function  handleIngredientChoice() {
     event.preventDefault();
     let ingredient = $("#firstIngredient").val();
     console.log(ingredient);
+    $("#firstIngredient").val("")
     fetchRecipiesIngredients(ingredient);
   });
 }
@@ -58,6 +59,7 @@ function handleDishChoice(){
   event.preventDefault();
   console.log("you cliked to submit choice")
   let dish = $("#dishchoice").val();
+  $("#dishchoice").val("");
   fetchRecipiesDish(dish);
 })
 }
@@ -103,13 +105,16 @@ function renderStartPage() {
   fetchRandomRecipies();
   return `
     <div>
-      <header>            
-                  <h1>Ever Recipes</h1>
+      <header>   
+            <div class="headercont"> 
+                <h1>Ever Recipes</h1>
                   <nav class="navigationSearch">
-                  <button class="nav" id="dishes">Dishes</button>
-                  <button class="nav" id="ingredients">Ingredients</button>
-                  <button class="nav" id="cuisine">Cuisines</button>
-                  </nav>  
+                      <div class="nav" id="dishes">Dishes</div>
+                      <div class="nav" id="ingredients">Ingredients</div>
+                      <div class="nav" id="cuisine">Cuisines</div>
+                  </nav>
+             </div>         
+               <hr>    
       </header>
                 
       <main>
@@ -134,20 +139,20 @@ function renderRandom(responseJson) {
   for (let i = 0; i < responseJson.recipes.length; i++)
     $(".randomResults").append(`
 
-  <div id='randomRecipies'>
-  <a href="${responseJson.recipes[i].sourceUrl}">
-  <img id="randomRecipeImage" src=${responseJson.recipes[i].image}>
-      <h3 id="randomRecipeTitle">${responseJson.recipes[i].title}</h3>
-        
-        <p>Click to go to Recipe</p></a>
-
-  </div>`);
+  <div class= "randomRecipies" id='randomRecipies'>
+        <a href="${responseJson.recipes[i].sourceUrl}">
+          <img id="randomRecipeImage" src=${responseJson.recipes[i].image}>
+          <p id="RecipeTitle">${responseJson.recipes[i].title}</p>
+          <p>Click Me To See Full Recipe</p>
+        </a>
+  <br>      
+  </div><br> <br> <br> `);
 }
 
 function renderIngredientsForm() {
   return `
     <form>
-      <h2>What ingrediet do you want in your recipe?</h2>
+      <h2>What ingredient do you want in your recipe?</h2>
       <div id="one"><input type="text" id="firstIngredient" class="addfirstIngredient">
           <button type="submit" class="addfirstIngredient">Submit</button>
       </div>
@@ -177,9 +182,9 @@ function renderDishResults(responseJson){
   for (let i = 0; i < responseJson.products.length; i++) {
     $(".searchResults3").append(`
 
-          <div id='ingredientRecipies${i}'>
+          <div id='ingredientRecipies'>
             <img id="ingredientRecipeImage" src=${responseJson.products[i].image}>
-            <h3 id="ingredientRecipeTitle">${responseJson.products[i].title}</h3>
+            <h3 id="RecipeTitle">${responseJson.products[i].title}</h3>
               <button type="submit" onclick="gotoRecipe(${responseJson.products[i].id})">Get Recipe</button>
           </div><br><br> `);
   }
@@ -203,11 +208,11 @@ function renderIngredientResults(responseJson) {
   for (let i = 0; i < responseJson.length; i++) {
     $(".searchResults").append(`
 
-          <div id='ingredientRecipies${i}'>
+          <div id='ingredientRecipies'>
             <img id="ingredientRecipeImage" src=${responseJson[i].image}>
-            <h3 id="ingredientRecipeTitle">${responseJson[i].title}</h3>
-              <button type="submit" onclick="gotoRecipe(${responseJson[i].id})">Get Recipe</button>
-          </div><br><br> `);
+            <h3 id="RecipeTitle">${responseJson[i].title}</h3>
+            <button type="submit" onclick="gotoRecipe(${responseJson[i].id})">Get Recipe</button>
+          </div> `);
   }
  
 
@@ -224,7 +229,7 @@ function renderCuisineForm() {
   <fieldset>
      <legend><h2>Select Cuisine</h2></legend>
      
-        <label for= "Cuisine">Select list</label>
+        
         <select id = "myList" class = "cuisineSelection">
               <option value "" selected disabled>Select One</option>
               <option value = "African">African</option>
@@ -266,10 +271,10 @@ let url = responseJson.results[i].sourceUrl
 $('.searchResults3').append(`
 <div id="ingredientRecipies">
             <a href="${url}"><img id="ingredientRecipeImage" src="https://spoonacular.com/recipeImages/${responseJson.results[i].image}">
-            <h3 id="ingredientRecipeTitle">${responseJson.results[i].title}</h3></a>
+            <h3 id="RecipeTitle">${responseJson.results[i].title}</h3></a>
             <p><a href="${url}">Click to go to the recipie</a></p>
-              <br><br>
-          </div><br><br>` );
+              
+          </div>` );
 
 }
 // <button type="submit" onclick="gotoURL(${responseJson})">Get Recipe</button>

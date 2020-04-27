@@ -1,6 +1,7 @@
 * {
-  font-family: "Quicksand", sans-serif;
+  /*font-family: "Quicksand", sans-serif;*/
   box-sizing: border-box;
+  font-family: "Cinzel", serif;
 }
 
 html {
@@ -12,67 +13,64 @@ html {
   background-size: cover;
 }
 
-h1 {
-  text-align: center;
-  font-weight: 600;
-  color: beige;
-  font-size: 80px;
-  margin-top: 10px;
+.headercont {
+  display: flex;
+  justify-content: space-around;
 }
 
+h1 {
+  text-align: center;
+  font-weight: 400;
+  color: darkgreen;
+  font-size: 60px;
+  margin-top: 10px;
+  font-family: cursive;
+}
 
-h2{
-
+h2 {
+  margin-top: 0px;
   font-size: 40px;
 }
 
-h3 {
-  font-size: 20px;
-}
 .nav {
-  width: 180px;
-  height: 20px;
+  margin: 20px;
+  height: 60px;
+  width: 130px;
+  padding: 20px;
   background-color: beige;
   text-align: center;
   border-radius: 20%;
-  padding: 50px;
 }
 
-div {
-  padding: 20px;
+.nav:hover {
+  background-color: burlywood;
+  cursor: pointer;
 }
+
 .navigationSearch {
   justify-content: space-around;
   display: flex;
 }
 
-.navicon {
-  display: none;
-  width: 130px;
-}
-
 #randomRecipeImage {
-  height: 150px;
+  height: 160px;
+  float: left;
+  border-radius: 20%;
 }
 
-#randomRecipeTitle {
-  font-size: 30px;
-}
-.addsecondingredient {
-  display: none;
-}
-
-.addThirdIngredient {
-  display: none;
+#ingredientRecipeImage {
+  width:  150px;
+  float: left;
+  border-radius: 20%;
 }
 
-div {
+#RecipeTitle {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#ingredientRecipies button {
   text-align: center;
-  margin-top: 50px;
-}
-
-form {
-  margin: 100px;
 }
 
 section {
@@ -80,20 +78,35 @@ section {
   margin-top: 80px;
 }
 
-#randomRecipies {
-  margin-right: auto;
+A {
+  color: black;
+
+  text-decoration: none;
+}
+
+.randomResults {
+  text-align: center;
+}
+
+#ingredientRecipies {
+  justify-content: space-evenly;
   margin-left: auto;
-  width: 70%;
-  display: flex;
+  margin-right: auto;
+
+  margin: 150px;
+}
+.randomRecipies {
+  margin-left: auto;
+  margin-right: auto;
+  margin: 50px;
+}
+
+.searchResults {
+  text-align: center;
 }
 
 
-#ingredientRecipeImage{
+fieldset{
 
-  height: 200px;
-}
-
-notshowurl a {
-
-  display: hide;
+  border: none;
 }

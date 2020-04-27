@@ -167,7 +167,7 @@ function renderIngredientsForm() {
 function renderDishForm(){
   return `
     <form>
-      <h2>What dish are you looking for?</h2>
+      <h2>What product are you looking for?</h2>
       <div id="one"><input type="text" id="dishchoice" class="dishchoice">
           <button type="submit" class="dishchoice">Submit</button>
       </div>

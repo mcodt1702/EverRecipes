@@ -53,19 +53,19 @@ h2 {
 }
 
 #randomRecipeImage {
-  height: 160px;
+  height: 200px;
   float: left;
   border-radius: 20%;
 }
 
 #ingredientRecipeImage {
-  width:  150px;
+  height: 200px;
   float: left;
   border-radius: 20%;
 }
 
 #RecipeTitle {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
 }
 

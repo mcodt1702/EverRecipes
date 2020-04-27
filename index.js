@@ -109,9 +109,9 @@ function renderStartPage() {
             <div class="headercont"> 
                 <h1>Ever Recipes</h1>
                   <nav class="navigationSearch">
-                      <div class="nav" id="dishes">Dishes</div>
-                      <div class="nav" id="ingredients">Ingredients</div>
-                      <div class="nav" id="cuisine">Cuisines</div>
+                      <div class="nav" id="dishes">Grocery Items</div>
+                      <div class="nav" id="ingredients">Recipes by Ingredients</div>
+                      <div class="nav" id="cuisine">Recipes by Cuisines</div>
                   </nav>
              </div>         
                <hr>    
@@ -152,7 +152,8 @@ function renderRandom(responseJson) {
 function renderIngredientsForm() {
   return `
     <form>
-      <h2>What ingredient do you want in your recipe?</h2>
+      <h2>What ingredients do you want in your recipe?</h2>
+      <h5>To search multiple ingredients separete them with a coma,</h5>
       <div id="one"><input type="text" id="firstIngredient" class="addfirstIngredient">
           <button type="submit" class="addfirstIngredient">Submit</button>
       </div>
@@ -179,13 +180,14 @@ function renderDishForm(){
 
 function renderDishResults(responseJson){
   console.log(responseJson);
+  $(".searchResults3").html("");
   for (let i = 0; i < responseJson.products.length; i++) {
     $(".searchResults3").append(`
 
           <div id='ingredientRecipies'>
             <img id="ingredientRecipeImage" src=${responseJson.products[i].image}>
             <h3 id="RecipeTitle">${responseJson.products[i].title}</h3>
-              <button type="submit" onclick="gotoRecipe(${responseJson.products[i].id})">Get Recipe</button>
+              <button type="submit" onclick="gotoURL()">Get Items</button>
           </div><br><br> `);
   }
 
@@ -277,15 +279,13 @@ $('.searchResults3').append(`
           </div>` );
 
 }
-// <button type="submit" onclick="gotoURL(${responseJson})">Get Recipe</button>
-//<br>is it doing anything<br>
-//https://www.chromestatus.com/feature/5629709824032768
+
 }
 
 
-function gotoURL(responseJson){
-  window.location.assign(`url`); 
-  window.location.assign(`"${responseJson.results[i].sourceUrl}"`)
+function gotoURL(){
+  
+  window.location.assign("https://www.wholefoodsmarket.com/amazon")
 
 
 }
@@ -296,7 +296,7 @@ function gotoURL(responseJson){
 
 function fetchRandomRecipies() {
   randomBaseUrl =
-    "https://api.spoonacular.com/recipes/random?number=5&apiKey=9e69e52110214fba9df8d2b11c0d0ec1";
+    "1111111https://api.spoonacular.com/recipes/random?number=5&apiKey=9e69e52110214fba9df8d2b11c0d0ec1";
 
   fetch(randomBaseUrl)
     .then((response) => {
@@ -382,7 +382,7 @@ console.log(cuisineBaseURL);
   .then((responseJson) => renderDishResults(responseJson));
 
 
-  console.log(dish);
+  console.log(dishBaseURL);
 }
 
 

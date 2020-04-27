@@ -32,10 +32,15 @@ h2 {
   font-size: 40px;
 }
 
+h5{
+text-align: center;
+}
+
+
 .nav {
   margin: 20px;
-  height: 60px;
-  width: 130px;
+  height: 80px;
+  width: 150px;
   padding: 20px;
   background-color: beige;
   text-align: center;

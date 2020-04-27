@@ -153,7 +153,7 @@ function renderIngredientsForm() {
   return `
     <form>
       <h2>What ingredients do you want in your recipe?</h2>
-      <h5>To search multiple ingredients separete them with a coma,</h5>
+      <h5>To search multiple ingredients separate them with a coma,</h5>
       <div id="one"><input type="text" id="firstIngredient" class="addfirstIngredient">
           <button type="submit" class="addfirstIngredient">Submit</button>
       </div>

@@ -299,7 +299,7 @@ function gotoURL(){
 
 function fetchRandomRecipies() {
   randomBaseUrl =
-    "1111111https://api.spoonacular.com/recipes/random?number=5&apiKey=9e69e52110214fba9df8d2b11c0d0ec1";
+    "https://api.spoonacular.com/recipes/random?number=5&apiKey=9e69e52110214fba9df8d2b11c0d0ec1";
 
   fetch(randomBaseUrl)
     .then((response) => {

@@ -36,7 +36,6 @@ H1{
   color: darkgreen;
   font-family: cursive;
   text-align: center;
-  font-weight: 400
 }
 
 .nav{
@@ -54,7 +53,7 @@ H1{
 
 
 #randomRecipeImage {
-  height: 100px;
+  height: 150px;
 
   border-radius: 20%;
 }

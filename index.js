@@ -267,12 +267,15 @@ function renderCuisine(responseJson){
 console.log("Im about to render the responseJson")
 console.log(responseJson);
 $('.searchResults3').show();
+$('.searchResults2').hide();
+$('.searchResults').hide();
 for (let i=0; i < responseJson.results.length; i++){
 console.log(responseJson.results[i].title)
 let url = responseJson.results[i].sourceUrl
 $('.searchResults3').append(`
 <div id="ingredientRecipies">
-            <a href="${url}"><img id="ingredientRecipeImage" src="https://spoonacular.com/recipeImages/${responseJson.results[i].image}">
+<br><br>            
+<a href="${url}"><img id="ingredientRecipeImage" src="https://spoonacular.com/recipeImages/${responseJson.results[i].image}">
             <h3 id="RecipeTitle">${responseJson.results[i].title}</h3></a>
             <p><a href="${url}">Click to go to the recipie</a></p>
               

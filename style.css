@@ -4,6 +4,71 @@
   font-family: "Cinzel", serif;
 }
 
+
+A {
+  color: black;
+
+  text-decoration: none;
+}
+
+div{
+
+  margin-top: 50px;
+}
+
+
+section {
+  text-align: center;
+  margin-top: 80px;
+}
+.headercont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+html {
+
+  background-color: wheat;
+}
+
+H1{
+  color: darkgreen;
+  font-family: cursive;
+  text-align: center;
+}
+
+.nav{
+  margin-left: auto;
+  margin-right: auto;
+  height: 30px;
+  width: 80%;
+  padding: 20px;
+  background-color: beige;
+  text-align: center;
+  border-radius: 20%;
+  margin-top: 20px;
+}
+
+
+
+#randomRecipeImage {
+  height: 100px;
+
+  border-radius: 20%;
+}
+
+#ingredientRecipeImage {
+  height: 100px;
+
+  border-radius: 20%;
+}
+
+
+
+
+@media screen and (min-width: 770px) {
+
 html {
   background: url(./images/mapleWoodDarkVertical.jpg) no-repeat center center
     fixed;

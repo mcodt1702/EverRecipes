@@ -10,7 +10,6 @@ function listenToCuisine() {
     $(".searchResults").hide();
     $(".searchResults3").hide();
     $(".searchResults2").show();
-    console.log("i hear you want mexican");
     $(".searchResults2").html(renderCuisineForm());
     handleCuisineChoice();
   });
@@ -23,7 +22,7 @@ function listenToDishes() {
     $(".searchResults").hide();
     $(".searchResults3").show();
     $(".searchResults2").hide()
-    console.log("i hear you want a special dish");
+  
     $(".searchResults3").html(renderDishForm());
     handleDishChoice();
     
@@ -38,7 +37,7 @@ function  listentToIngredients() {
     $(".searchResults3").hide();
     $(".searchResults").show();
 
-    console.log("i hear you have ingredients to use");
+   
     $(".searchResults").html(renderIngredientsForm());
      handleIngredientChoice();
   });
@@ -48,7 +47,7 @@ function  handleIngredientChoice() {
   $("form").on("submit", function (event) {
     event.preventDefault();
     let ingredient = $("#firstIngredient").val();
-    console.log(ingredient);
+ 
     $("#firstIngredient").val("")
     fetchRecipiesIngredients(ingredient);
   });
@@ -57,7 +56,7 @@ function  handleIngredientChoice() {
 function handleDishChoice(){ 
   $("form").on("submit", function (event) {
   event.preventDefault();
-  console.log("you cliked to submit choice")
+
   let dish = $("#dishchoice").val();
   $("#dishchoice").val("");
   fetchRecipiesDish(dish);
@@ -68,7 +67,7 @@ function handleCuisineChoice() {
   $("#myList").on("change", function (event) {
     event.preventDefault();
     const aquireCuisine = $(".cuisineSelection").val();
-    console.log(aquireCuisine);
+  
     fetchRecipiesCuisine(aquireCuisine); 
     
   });
@@ -77,10 +76,6 @@ function handleCuisineChoice() {
 function listenToExpandedIngredientSearch() {
   $(".searchResults").on("click", function (event) {
     event.preventDefault();
-    console.log("you want to expand the recipe");
-
-    console.log($(".searchResults").attr("id"));
-
     fetchURLwithId();
   });
 }
@@ -179,7 +174,7 @@ function renderDishForm(){
 
 
 function renderDishResults(responseJson){
-  console.log(responseJson);
+
   $(".searchResults3").html("");
   for (let i = 0; i < responseJson.products.length; i++) {
     $(".searchResults3").append(`
@@ -206,7 +201,7 @@ function gotoRecipe(recipeId) {
 
 
 function renderIngredientResults(responseJson) {
-  console.log(responseJson);
+ 
   for (let i = 0; i < responseJson.length; i++) {
     $(".searchResults").append(`
 
@@ -264,13 +259,12 @@ function renderCuisineForm() {
 
 
 function renderCuisine(responseJson){
-console.log("Im about to render the responseJson")
-console.log(responseJson);
+
 $('.searchResults3').show();
 $('.searchResults2').hide();
 $('.searchResults').hide();
 for (let i=0; i < responseJson.results.length; i++){
-console.log(responseJson.results[i].title)
+
 let url = responseJson.results[i].sourceUrl
 $('.searchResults3').append(`
 <div id="ingredientRecipies">
@@ -320,7 +314,7 @@ function fetchRandomRecipies() {
 
 function fetchRecipiesIngredients(ingredient) {
   ingredientBaseURL = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}${apiKey}`;
-  console.log(ingredientBaseURL);
+
 
   fetch(ingredientBaseURL)
     .then((response) => {
@@ -339,7 +333,7 @@ function fetchRecipiesIngredients(ingredient) {
 
 
 function fetchURLwithId(fetchURLwithId) {
-  console.log("recipe id =", fetchURLwithId);
+ 
 
 let idBaseURL = `https://api.spoonacular.com/recipes/${fetchURLwithId}/information?includeNutrition=false${apiKey}`
 
@@ -352,14 +346,14 @@ fetch(idBaseURL)
   throw new Error(response.statusText);
 })
 .then((responseJson) => window.location.assign(`${responseJson.sourceUrl}`));
-console.log('see you later aligator')
+
 
 }
 
 
 function fetchRecipiesCuisine(aquireCuisine){
 cuisineBaseURL = `https://api.spoonacular.com/recipes/search?cuisine=${aquireCuisine}${apiKey}`
-console.log(cuisineBaseURL);
+
           fetch(cuisineBaseURL)
           .then((response) => {
             if (response.ok) {
@@ -385,7 +379,7 @@ console.log(cuisineBaseURL);
   .then((responseJson) => renderDishResults(responseJson));
 
 
-  console.log(dishBaseURL);
+ 
 }
 
 

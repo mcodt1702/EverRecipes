@@ -122,7 +122,8 @@ function renderStartPage() {
         <section class="searchResults2" id="results2">
         <h1>Recipies with your ingredient</h1>
         </section>
-        <section class="searchResults3" id="results3"></section>
+        <section class="searchResults3" id="results3">
+        <h2>Recipes by Cuisine</h2></section>
         <section class="suggestions" id="hideme"></section>
       </main>
     </div>

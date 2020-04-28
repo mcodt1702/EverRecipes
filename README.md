@@ -10,7 +10,7 @@ Ever Recipes is an app that can search for recipes and ingredients three differe
 ![Start page for Ever Recipes](https://github.com/mcodt1702/recipesApp/blob/master/images/everRecipesStartPage.png)
 
 
-The app can be found here:  https://mcodt1702.github.io/recipesApp/
+The app can be found here:  https://mcodt1702.github.io/EverRecipes/
 
 The puspose of the app is to provide the user with recipies and a list of ingredients acoording to three different options.  
 

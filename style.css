@@ -2,7 +2,7 @@
   /*font-family: "Quicksand", sans-serif;*/
   box-sizing: border-box;
   font-family: "Cinzel", serif;
-  color: beige;
+  color: black;
 }
 
 
@@ -167,10 +167,10 @@ A {
 
 #ingredientRecipies {
   justify-content: space-evenly;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 150px;
+  margin-right: 150px;
 
-  margin: 150px;
+  margin-bottom: 150px;
 }
 .randomRecipies {
   margin-left: auto;
@@ -198,5 +198,7 @@ fieldset{
 .errorMessage{
   font-size: 30px;
 }
-
+.errorMessage2{
+  font-size: 40px;
+}
 }

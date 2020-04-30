@@ -277,14 +277,16 @@ function renderCuisineForm() {
 
 
 function renderCuisine(responseJson){
-
-$('.searchResults3').show();
-$('.searchResults2').hide();
+  $(".searchResults2").html("");
+$('.searchResults3').hide();
+$('.searchResults2').show();
 $('.searchResults').hide();
+
+$('.searchResults2').append(`<p class="errorMessage2">Your recipes</p>`)
 for (let i=0; i < responseJson.results.length; i++){
 
 let url = responseJson.results[i].sourceUrl
-$('.searchResults3').append(`
+$('.searchResults2').append(`
 <div id="ingredientRecipies">
 <br><br>            
 <a href="${url}" target="blank"><img id="ingredientRecipeImage" src="https://spoonacular.com/recipeImages/${responseJson.results[i].image}" alt="image of recipe">

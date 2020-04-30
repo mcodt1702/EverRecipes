@@ -2,6 +2,7 @@
   /*font-family: "Quicksand", sans-serif;*/
   box-sizing: border-box;
   font-family: "Cinzel", serif;
+  color: beige;
 }
 
 
@@ -33,7 +34,7 @@ html {
 }
 
 H1{
-  color: darkgreen;
+  color: beige;
   font-family: cursive;
   text-align: center;
 }
@@ -48,11 +49,12 @@ H1{
   text-align: center;
   border-radius: 20%;
   margin-top: 20px;
+  color: black;
 }
 
 
 
-#randomRecipeImage {
+.randomRecipeImage {
   height: 150px;
 
   border-radius: 20%;
@@ -64,6 +66,9 @@ H1{
   border-radius: 20%;
 }
 
+.errorMessage{
+  font-size: 20px;
+}
 
 
 
@@ -87,7 +92,7 @@ html {
 h1 {
   text-align: center;
   font-weight: 400;
-  color: darkgreen;
+  color: beige;
   font-size: 60px;
   margin-top: 10px;
   font-family: cursive;
@@ -111,6 +116,7 @@ text-align: center;
   background-color: beige;
   text-align: center;
   border-radius: 20%;
+  color: black;
 }
 
 .nav:hover {
@@ -123,7 +129,7 @@ text-align: center;
   display: flex;
 }
 
-#randomRecipeImage {
+.randomRecipeImage {
   height: 200px;
   float: left;
   border-radius: 20%;
@@ -135,7 +141,7 @@ text-align: center;
   border-radius: 20%;
 }
 
-#RecipeTitle {
+.RecipeTitle {
   font-size: 30px;
   font-weight: 600;
 }
@@ -180,4 +186,17 @@ A {
 fieldset{
 
   border: none;
+}
+
+.dishchoice, .cuisineSelection, .buttonItem, option, .addfirstIngredient{
+
+  color: black;
+}
+
+
+
+.errorMessage{
+  font-size: 30px;
+}
+
 }

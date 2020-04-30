@@ -2,6 +2,7 @@
 //listenters for three search variables-----listenters for three search variables-----
 //----------------listenters for three search variables-----listenters for three search variables-----
 const apiKey = "&apiKey=9e69e52110214fba9df8d2b11c0d0ec1";
+const apiBaseUrl = "https://api.spoonacular.com/";
 
 function listenToCuisine() {
   $(".navigationSearch").on("click", "#cuisine", function (event) {
@@ -113,18 +114,18 @@ function renderStartPage() {
       </header>
                 
       <main>
-        <section class="randomResults" id="results">
+        <section class="randomResults" id="resultsrandom">
           <h2>Today's Suggestions</h2>
         </section>  
         <section class="searchResults" id="results">
-        <h1>Recipies with your igredient</h1>
+        <h2>Recipies with your igredient</h2>
         </section>
         <section class="searchResults2" id="results2">
-        <h1>Recipies with your ingredient</h1>
+        <h2>Recipies with your ingredient</h2>
         </section>
         <section class="searchResults3" id="results3">
         <h2>Recipes by Cuisine</h2></section>
-        <section class="suggestions" id="hideme"></section>
+        
       </main>
     </div>
     `;
@@ -135,10 +136,10 @@ function renderRandom(responseJson) {
   for (let i = 0; i < responseJson.recipes.length; i++)
     $(".randomResults").append(`
 
-  <div class= "randomRecipies" id='randomRecipies'>
-        <a href="${responseJson.recipes[i].sourceUrl}">
-          <img id="randomRecipeImage" src=${responseJson.recipes[i].image}>
-          <p id="RecipeTitle">${responseJson.recipes[i].title}</p>
+  <div class= "randomRecipies">
+        <a href="${responseJson.recipes[i].sourceUrl}" target="blank">
+          <img class="randomRecipeImage" src=${responseJson.recipes[i].image}  alt="image random recipes">
+          <p class="RecipeTitle">${responseJson.recipes[i].title}</p>
           <p>Click Me To See Full Recipe</p>
         </a>
   <br>      
@@ -175,15 +176,24 @@ function renderDishForm(){
 
 
 function renderDishResults(responseJson){
+console.log(dishBaseURL)
+$(".searchResults3").html("");
+  if (!responseJson || responseJson.products.length === 0){
 
-  $(".searchResults3").html("");
+    $(".searchResults3").append(`<p class="errorMessage">We don't know that item please try again</p>`)
+  }
+
+ 
+      
+
+  
   for (let i = 0; i < responseJson.products.length; i++) {
     $(".searchResults3").append(`
 
           <div id='ingredientRecipies'>
-            <img id="ingredientRecipeImage" src=${responseJson.products[i].image}>
-            <h3 id="RecipeTitle">${responseJson.products[i].title}</h3>
-              <button type="submit" onclick="gotoURL()">Get Items</button>
+            <img id="ingredientRecipeImage" src=${responseJson.products[i].image}  alt="image of serched recipes">
+            <h3 class="RecipeTitle">${responseJson.products[i].title}</h3>
+              <button class="buttonItem" type="submit" onclick="gotoURL()">Get Items</button>
           </div><br><br> `);
   }
 
@@ -202,14 +212,21 @@ function gotoRecipe(recipeId) {
 
 
 function renderIngredientResults(responseJson) {
- 
+  $(".searchResults").html("");
+
+  if (!responseJson ||  responseJson.length === 0){
+
+    $(".searchResults").append(`<p class="errorMessage"> We Don't Know That Ingredient Please Try Anotherone</p>`)
+  }
+
+  
   for (let i = 0; i < responseJson.length; i++) {
     $(".searchResults").append(`
 
           <div id='ingredientRecipies'>
-            <img id="ingredientRecipeImage" src=${responseJson[i].image}>
-            <h3 id="RecipeTitle">${responseJson[i].title}</h3>
-            <button type="submit" onclick="gotoRecipe(${responseJson[i].id})">Get Recipe</button>
+            <img id="ingredientRecipeImage" src=${responseJson[i].image}  alt="image of item">
+            <h3 class="RecipeTitle">${responseJson[i].title}</h3>
+            <button class="buttonItem" type="submit" onclick="gotoRecipe(${responseJson[i].id})">Get Recipe</button>
           </div> `);
   }
  
@@ -270,9 +287,9 @@ let url = responseJson.results[i].sourceUrl
 $('.searchResults3').append(`
 <div id="ingredientRecipies">
 <br><br>            
-<a href="${url}"><img id="ingredientRecipeImage" src="https://spoonacular.com/recipeImages/${responseJson.results[i].image}">
-            <h3 id="RecipeTitle">${responseJson.results[i].title}</h3></a>
-            <p><a href="${url}">Click to go to the recipie</a></p>
+<a href="${url}" target="blank"><img id="ingredientRecipeImage" src="https://spoonacular.com/recipeImages/${responseJson.results[i].image}" alt="image of recipe">
+            <h3 class="RecipeTitle">${responseJson.results[i].title}</h3></a>
+            <p><a href="${url}" target="blank">Click to go to the recipie</a></p>
               
           </div>` );
 
@@ -293,18 +310,26 @@ function gotoURL(){
 // //---------------fetch api functions---------------fetch api functions---------------fetch api functions
 
 function fetchRandomRecipies() {
-  randomBaseUrl =
-    "https://api.spoonacular.com/recipes/random?number=5&apiKey=9e69e52110214fba9df8d2b11c0d0ec1";
+randomBaseUrl =`${apiBaseUrl}recipes/random?number=5${apiKey}`;
 
-  fetch(randomBaseUrl)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error(response.statusText);
-    })
-    .then((responseJson) => renderRandom(responseJson));
+fetch(randomBaseUrl)
+.then((response) => {
+  if (response.ok) {
+    return response.json();
+  }
+  throw new Error(response.statusText);
+})
+.catch((error)=> alert(error))
+
+.then((responseJson) => renderRandom(responseJson));
+
+
+
+
 }
+
+
+
 
 
 // //---------------fetch api functions---------------fetch api functions---------------fetch api functions
@@ -314,17 +339,17 @@ function fetchRandomRecipies() {
 
 
 function fetchRecipiesIngredients(ingredient) {
-  ingredientBaseURL = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredient}${apiKey}`;
+  ingredientBaseURL = `${apiBaseUrl}recipes/findByIngredients?ingredients=${ingredient}${apiKey}`;
 
 
   fetch(ingredientBaseURL)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error(response.statusText);
-    })
-    .then((responseJson) => renderIngredientResults(responseJson));
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+    //throw new Error(response.statusText);
+  })
+  .then((responseJson) => renderIngredientResults(responseJson));
 }
 
 
@@ -336,7 +361,7 @@ function fetchRecipiesIngredients(ingredient) {
 function fetchURLwithId(fetchURLwithId) {
  
 
-let idBaseURL = `https://api.spoonacular.com/recipes/${fetchURLwithId}/information?includeNutrition=false${apiKey}`
+let idBaseURL = `${apiBaseUrl}recipes/${fetchURLwithId}/information?includeNutrition=false${apiKey}`
 
 
 fetch(idBaseURL)
@@ -353,7 +378,7 @@ fetch(idBaseURL)
 
 
 function fetchRecipiesCuisine(aquireCuisine){
-cuisineBaseURL = `https://api.spoonacular.com/recipes/search?cuisine=${aquireCuisine}${apiKey}`
+cuisineBaseURL = `${apiBaseUrl}recipes/search?cuisine=${aquireCuisine}${apiKey}`
 
           fetch(cuisineBaseURL)
           .then((response) => {
@@ -367,9 +392,10 @@ cuisineBaseURL = `https://api.spoonacular.com/recipes/search?cuisine=${aquireCui
 
 }
 
- function fetchRecipiesDish(dish){
-  dishBaseURL = `https://api.spoonacular.com/food/products/search?query=${dish}${apiKey}`
+function fetchRecipiesDish(dish){
+  dishBaseURL = `${apiBaseUrl}food/products/search?query=${dish}${apiKey}`
 
+  
   fetch(dishBaseURL)
   .then((response) => {
     if (response.ok) {
@@ -379,12 +405,7 @@ cuisineBaseURL = `https://api.spoonacular.com/recipes/search?cuisine=${aquireCui
   })
   .then((responseJson) => renderDishResults(responseJson));
 
-
- 
 }
-
-
-
 
 
 
